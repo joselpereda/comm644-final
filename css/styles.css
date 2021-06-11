@@ -1,0 +1,28 @@
+.jumbotron {
+    position: relative;
+    background:none;
+  }
+  .jumbotron:after {
+      content : "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-image: url(https://placebear.com/g/900/300);
+      background-repeat: no-repeat;
+      background-position: center;
+    background-size: cover;
+      width: 100%;
+      height: 100%;
+      opacity : 0.2;
+      z-index: -1;
+  }
+/*
+  select {
+      padding: .5em .6em;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-shadow: inset 0 1px 3px #ddd;
+      border-radius: 4px;
+      height: 25px;
+  } */
