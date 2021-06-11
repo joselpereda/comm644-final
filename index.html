@@ -42,180 +42,183 @@
 
       <div style="background:transparent !important" class="jumbotron">
         <h1>Pizza Order Form</h1>
-        <p class="lead">Prepared to the Delight of Our Most Demanding Customers! Tel: (619) 921-2222</p>
+        <p class="lead">Pizza Prepared to the Delight of Our Most Demanding Customers! Tel: (619) 921-2222</p>
       </div>
 
       <!--PIZZA ORDER: CAPTURE DELIVERY INFORMATION & PIZZA ORDER DETAILS-->
-    <div class="container">
-    <form action="" id="orderForm">
-        <div class="col-lg-6">
+    <div id="orderInformation">
+        <div class="container">
+        <form action="" id="orderForm">
+            <div class="col-lg-6">
 
-            <!--CUSTOMER NAME FIELD-->
-        <fieldset>
-            <legend>Delivery Information</legend>
-            <!--<h2>Delivery Information</h2>-->
+                <!--CUSTOMER NAME FIELD-->
+            <fieldset>
+                <legend>Delivery Information</legend>
+                <!--<h2>Delivery Information</h2>-->
 
-            <label for="custName">Enter Firt & Last Name</label>
-            <input type="text" id="custName" placeholder ="Joey Smith" class="form-control"><br>
-            
-            <!--ADDRESS AND ADDRESS TYPE-->
-            <div>
-                <strong>Address Type: </strong>
-                <select name="addType" id="addType">
-                    <option value="noSelection">Select Address Type</option>
-                    <option value="house">House</option>
-                    <option value="apartment">Apartment</option>
-                    <option value="business">Business</option>
-                    <option value="campus">Campus</option>
-                    <option value="hotel">Hotel</option>
-                    <option value="dorm">Dorm</option>
-                    <option value="other">Other</option>
-                </select>
+                <label for="custName">Enter Firt & Last Name</label>
+                <input type="text" id="custName" placeholder ="Joey Smith" class="form-control"><br>
+                
+                <!--ADDRESS AND ADDRESS TYPE-->
+                <div>
+                    <label>Address Type:</label>
+                    <select name="addType" id="addType">
+                        <option value="0">Select Address Type</option>
+                        <option value="house">House</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="business">Business</option>
+                        <option value="campus">Campus</option>
+                        <option value="hotel">Hotel</option>
+                        <option value="dorm">Dorm</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="streetAddress"><br>Street Address</label>
+                    <input type="text"  id="streetAddress" placeholder ="5432 Elm Street" class="form-control"><br>
 
-                <label for="streetAddress"><br>Street Address</label>
-                <input type="text"  id="streetAddress" placeholder ="5432 Elm Street" class="form-control"><br>
+                    <p id="otherSelected"></p>
+                </div>
+                
+                <!--CAPTURE OPITONAL APT, SUITE OR ROOM #-->
+                <div>
+                    <label for="subAddressType">Apt/Suite/Room #: </label>
+                    <input type="text" id="subAddressType" placeholder ="101" class="form-control">
+                    <input type="radio" id="apt" name="apt_suite_room" value="apt">
+                    <label for="apt">Apt</label>
+                    <input type="radio" id="suite" name="apt_suite_room" value="suite">
+                    <label for="suite">Suite</label>
+                    <input type="radio" id="room" name="apt_suite_room" value="room">
+                    <label for="room">Room</label>
+                </div>
 
-                <p id="otherSelected"></p>
+                <!--CAPTURE CITY-->
+                <div>
+                    <label for="city">City</label><br>
+                    <input type="text" maxlength="30" id="city" name="city" placeholder ="San Diego" class="form-control"><br>
+                </div>
+                <!--CAPTURE STATE-->
+                <div>
+                    <label for="state">State</label><br>
+                    <input type="text" maxlength="30"  id="state" name="state" placeholder ="CA" class="form-control"><br>
+                </div>
+                <!--CAPTURE ZIP CODE-->
+                <div>
+                    <label for="zipCode">Zip Code</label>
+                    <input type="text" maxlength="5"  id="zipCode" name="zipCode" placeholder ="91303" class="form-control"><br>
+                </div>
+                <!--CAPTURE PHONE #-->
+                <div>
+                    <label for="phone">Phone</label><br>
+                    <input type="tel" maxlength="15"  id="phone" name="phone" placeholder ="310-454-1212" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control"><br>
+                </div>
+                <!--CAPTURE E-MAIL-->
+                <div>
+                    <label for="email">E-mail</label><br>
+                    <input type="email" maxlength="30" id="email" name="email" placeholder ="joey.smith@live.com" class="form-control"><br>
+                </div>
+            </fieldset>
             </div>
-            
-            <!--CAPTURE OPITONAL APT, SUITE OR ROOM #-->
-            <div>
-                <label for="subAddressType">Apt/Suite/Room #: </label>
-                <input type="text" id="aptSuiteRoom" placeholder ="101" class="form-control">
-                <input type="radio" id="apt" name="apt_suite_room" value="apt">
-                <label for="apt">Apt</label>
-                <input type="radio" id="suite" name="apt_suite_room" value="suite">
-                <label for="suite">Suite</label>
-                <input type="radio" id="room" name="apt_suite_room" value="room">
-                <label for="suite">Room</label>
-            </div>
+            <div class="col-lg-6">
+            <fieldset>
+                <legend>Build Your Pizza</legend>
+                <!--<h2>Build Your Pizza</h2>-->
 
-            <!--CAPTURE CITY-->
-            <div>
-                <label for="city">City</label><br>
-                <input type="text" maxlength="30" id="city" name="city" placeholder ="San Diego" class="form-control"><br>
+                <div>
+                    <!--DOUGH TYPE SELECTION-->
+                    <strong>Step 1: Select Dough Type:</strong><br>
+                    <input type="radio" id="handTossed" name="doughOptions" value="Hand Tossed">
+                    <label for="handTossed">Hand Tossed</label>
+                    <input type="radio" id="thinCrust" name="doughOptions" value="Thin Crust">
+                    <label for="thinCrust">Thin Crust</label><br>
+                    <input type="radio" id="newYorkStyle" name="doughOptions" value="New York Style">
+                    <label for="newYorkStyle">New York Style</label>
+                    <input type="radio" id="glutenFree" name="doughOptions" value="Gluten Free">
+                    <label for="glutenFree">Gluten Free</label>
+                </div>
+                <div>
+                    <!--SELECT SIZE, DISPLAY PRICE FOR EACH SIZE-->
+                    <label for="sizeAndCost"><strong><br>Step 2: Select Size</strong></label>
+                    <select class="form-control" id="sizeAndCost">
+                        <option value="0">Select your preferred pizza size</option>
+                    </select>
+                </div>
+                <div>
+                    <!--SELECT AMOUNT OF CHEESE-->
+                    <label for="cheeseOptions"><br><strong>Step 3: How much cheese should we add?</strong></label>
+                    <select class="form-control" id="cheeseOptions">
+                        <option value="0">Light: $0.00</option>
+                        <option value="0">Normal: $0.00</option>
+                        <option value="2.99">Extra: +$2.99</option>
+                        <option value="3.99">Double: +$3.99</option>
+                    </select>
+                </div>
+                <div>
+                    <!--SELECT SAUCE TYPE-->
+                    <label for="sauceOptions"><br><strong>Step 4: What Type of Sauce?</strong></label>
+                    <select class="form-control" id="sauceOptions">
+                        <option value="0">Regular Tomato: $0.00</option>
+                        <option value="0.99">Hearty Tomato: +$.99</option>
+                        <option value="1.99">BBQ Sauce: +$1.99</option>
+                    </select>
+                </div>
+                <div id="toppings">
+                    <br><strong>Step 5: Extra Toppings - $0.99 each</strong>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="pepperoni" name="extraToppings" value="pepperoni"> Pepperoni</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="sausage" name="extraToppings" value="sausage"> Sausage</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="ham" name="extraToppings" value="ham"> Ham</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="bacon" name="extraToppings" value="bacon"> Bacon</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="salami" name="extraToppings" value="salami"> Salami</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="peppers" name="extraToppings" value="peppers"> Peppers</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="olives" name="extraToppings" value="olives"> Olives</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="jalapenos" name="extraToppings" value="jalapenos"> Jalapenos</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="mushrooms" name="extraToppings" value="mushrooms"> Mushrooms</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="pineapple" name="extraToppings" value="pineapple"> Pineapple</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="onion" name="extraToppings" value="onion"> Onion</label>
+                    </div>
+                </div>
+            </fieldset>    
             </div>
-            <!--CAPTURE STATE-->
             <div>
-                <label for="state">State</label><br>
-                <input type="text" maxlength="30"  id="state" name="state" placeholder ="CA" class="form-control"><br>
+                <a id="submitOrder"><button type="submit" class="btn btn-lg btn-success">Satisfied with My Order, Ready to Pay</button></a>
             </div>
-            <!--CAPTURE ZIP CODE-->
-            <div>
-                <label for="zipCode">Zip Code</label>
-                <input type="text" maxlength="5"  id="zipCode" name="zipCode" placeholder ="91303" class="form-control"><br>
-            </div>
-            <!--CAPTURE PHONE #-->
-            <div>
-                <label for="phone">Phone</label><br>
-                <input type="tel" maxlength="15"  id="phone" name="phone" placeholder ="310-454-1212" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control"><br>
-            </div>
-            <!--CAPTURE E-MAIL-->
-            <div>
-                <label for="email">E-mail</label><br>
-                <input type="email" maxlength="30" id="email" name="email" placeholder ="joey.smith@live.com" class="form-control"><br>
-            </div>
-        </fieldset>
+        </form>
         </div>
-        <div class="col-lg-6">
-        <fieldset>
-            <legend>Build Your Pizza</legend>
-            <!--<h2>Build Your Pizza</h2>-->
-
-            <div>
-                <!--DOUGH TYPE SELECTION-->
-                <strong>Step 1: Select Dough Type:</strong><br>
-                <input type="radio" id="handTossed" name="doughOptions" value="Hand Tossed">
-                <label for="handTossed">Hand Tossed</label>
-                <input type="radio" id="thinCrust" name="doughOptions" value="Thin Crust">
-                <label for="thinCrust">Thin Crust</label><br>
-                <input type="radio" id="newYorkStyle" name="doughOptions" value="New York Style">
-                <label for="newYorkStyle">New York Style</label>
-                <input type="radio" id="glutenFree" name="doughOptions" value="Gluten Free">
-                <label for="glutenFree">Gluten Free</label>
-            </div>
-            <div>
-                <!--SELECT SIZE, DISPLAY PRICE FOR EACH SIZE-->
-                <label for="sizeAndCost"><strong><br>Step 2: Select Size</strong></label>
-                <select class="form-control" id="sizeAndCost">
-                    <option value="0">Select your preferred pizza size</option>
-                </select>
-            </div>
-            <div>
-                <!--SELECT AMOUNT OF CHEESE-->
-                <label for="cheeseOptions"><br><strong>Step 3: How much cheese should we add?</strong></label>
-                <select class="form-control" id="cheeseOptions">
-                    <option value="0">Light: $0.00</option>
-                    <option value="0">Normal: $0.00</option>
-                    <option value="2.99">Extra: +$2.99</option>
-                    <option value="3.99">Double: +$3.99</option>
-                </select>
-            </div>
-            <div>
-                <!--SELECT SAUCE TYPE-->
-                <label for="sauceOptions"><br><strong>Step 4: What Type of Sauce?</strong></label>
-                <select class="form-control" id="sauceOptions">
-                    <option value="0">Regular Tomato: $0.00</option>
-                    <option value="0.99">Hearty Tomato: +$.99</option>
-                    <option value="1.99">BBQ Sauce: +$1.99</option>
-                </select>
-            </div>
-            <div id="toppings">
-                <br><strong>Step 5: Extra Toppings - $0.99 each</strong>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="pepperoni" name="extraToppings" value="pepperoni"> Pepperoni</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="sausage" name="extraToppings" value="sausage"> Sausage</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="ham" name="extraToppings" value="ham"> Ham</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="bacon" name="extraToppings" value="bacon"> Bacon</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="salami" name="extraToppings" value="salami"> Salami</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="peppers" name="extraToppings" value="peppers"> Peppers</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="olives" name="extraToppings" value="olives"> Olives</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="jalapenos" name="extraToppings" value="jalapenos"> Jalapenos</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="mushrooms" name="extraToppings" value="mushrooms"> Mushrooms</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="pineapple" name="extraToppings" value="pineapple"> Pineapple</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                    <input type="checkbox" class="form-check-input" id="onion" name="extraToppings" value="onion"> Onion</label>
-                </div>
-            </div>
-        </fieldset>    
-        </div>
-        <div>
-            <a id="submitOrder"><button type="submit" class="btn btn-lg btn-success">Satisfied with My Order, Ready to Pay</button></a>
-        </div>
-    </form>
     </div>
     <hr>
-    <div id="billingInformation" style="display: none;">
+    <div id="billingInformation">  <!--style="display: none;"-->
         <div class="container">
             <form action="" id="billingInfo">
                 <div class="col-lg-6">
@@ -225,182 +228,127 @@
                     <legend>Billing Information</legend>
 
                     <div class="form-group has-success">
-                        <label class="custom-control custom-checkbox" id="checkbox1">
+                        <label class="custom-control custom-checkbox" id="checkbox2">
                     <input type="checkbox" class="custom-control-input" id="bcheckBox">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Check if Same as a Delivery Address</span>
                 </label>
                     </div>
 
-                    <label for="custName">Enter Firt & Last Name</label>
-                    <input type="text" id="custName" placeholder ="Joey Smith" class="form-control"><br>
+                    <label for="custName2">Enter Firt & Last Name</label>
+                    <input type="text" id="custName2" placeholder ="Joey Smith" class="form-control"><br>
                     
                     <!--ADDRESS AND ADDRESS TYPE-->
                     <div>
-                        <strong>Address Type: </strong>
-                        <select name="addType" id="addType">
-                            <option value="noSelection">Select Address Type</option>
-                            <option value="house">House</option>
-                            <option value="apartment">Apartment</option>
-                            <option value="business">Business</option>
-                            <option value="campus">Campus</option>
-                            <option value="hotel">Hotel</option>
-                            <option value="dorm">Dorm</option>
-                            <option value="other">Other</option>
-                        </select>
-
-                        <label for="streetAddress"><br>Street Address</label>
-                        <input type="text"  id="streetAddress" placeholder ="5432 Elm Street" class="form-control"><br>
+                        <label for="streetAddress2"><br>Street Address</label>
+                        <input type="text"  id="streetAddress2" placeholder ="5432 Elm Street" class="form-control"><br>
 
                         <p id="otherSelected"></p>
                     </div>
                     
                     <!--CAPTURE OPITONAL APT, SUITE OR ROOM #-->
                     <div>
-                        <label for="subAddressType">Apt/Suite/Room #: </label>
-                        <input type="text" id="aptSuiteRoom" placeholder ="101" class="form-control">
-                        <input type="radio" id="apt" name="apt_suite_room" value="apt">
-                        <label for="apt">Apt</label>
-                        <input type="radio" id="suite" name="apt_suite_room" value="suite">
-                        <label for="suite">Suite</label>
-                        <input type="radio" id="room" name="apt_suite_room" value="room">
-                        <label for="suite">Room</label>
+                        <label for="subAddressType2">Apt/Suite/Room #: </label>
+                        <input type="text" id="subAddressType2" placeholder ="101" class="form-control">
+                        <input type="radio" id="apt2" name="apt_suite_room" value="apt">
+                        <label for="apt2">Apt</label>
+                        <input type="radio" id="suite2" name="apt_suite_room" value="suite">
+                        <label for="suite"2>Suite</label>
+                        <input type="radio" id="room2" name="apt_suite_room" value="room">
+                        <label for="room2">Room</label>
                     </div>
 
                     <!--CAPTURE CITY-->
                     <div>
-                        <label for="city">City</label><br>
-                        <input type="text" maxlength="30" id="city" name="city" placeholder ="San Diego" class="form-control"><br>
+                        <label for="city2">City</label><br>
+                        <input type="text" maxlength="30" id="city2" name="city2" placeholder ="San Diego" class="form-control"><br>
                     </div>
                     <!--CAPTURE STATE-->
                     <div>
-                        <label for="state">State</label><br>
-                        <input type="text" maxlength="30"  id="state" name="state" placeholder ="CA" class="form-control"><br>
+                        <label for="state2">State</label><br>
+                        <input type="text" maxlength="30"  id="state2" name="state2" placeholder ="CA" class="form-control"><br>
                     </div>
                     <!--CAPTURE ZIP CODE-->
                     <div>
-                        <label for="zipCode">Zip Code</label>
-                        <input type="text" maxlength="5"  id="zipCode" name="zipCode" placeholder ="91303" class="form-control"><br>
+                        <label for="zipCod2e">Zip Code</label>
+                        <input type="text" maxlength="5"  id="zipCode2" name="zipCode2" placeholder ="91303" class="form-control"><br>
                     </div>
                     <!--CAPTURE PHONE #-->
                     <div>
-                        <label for="phone">Phone</label><br>
-                        <input type="tel" maxlength="15"  id="phone" name="phone" placeholder ="310-454-1212" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control"><br>
+                        <label for="phone2">Phone</label><br>
+                        <input type="tel" maxlength="15"  id="phone2" name="phone2" placeholder ="310-454-1212" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control"><br>
                     </div>
                     <!--CAPTURE E-MAIL-->
                     <div>
-                        <label for="email">E-mail</label><br>
-                        <input type="email" maxlength="30" id="email" name="email" placeholder ="joey.smith@live.com" class="form-control"><br>
+                        <label for="email2">E-mail</label><br>
+                        <input type="email" maxlength="30" id="email2" name="email2" placeholder ="joey.smith@live.com" class="form-control"><br>
                     </div>
                 </fieldset>
                 </div>
                 <div class="col-lg-6">
-                <fieldset>
-                    <legend>Build Your Pizza</legend>
-                    <!--<h2>Build Your Pizza</h2>-->
-
-                    <div>
-                        <!--DOUGH TYPE SELECTION-->
-                        <strong>Step 1: Select Dough Type:</strong><br>
-                        <input type="radio" id="handTossed" name="doughOptions" value="Hand Tossed">
-                        <label for="handTossed">Hand Tossed</label>
-                        <input type="radio" id="thinCrust" name="doughOptions" value="Thin Crust">
-                        <label for="thinCrust">Thin Crust</label><br>
-                        <input type="radio" id="newYorkStyle" name="doughOptions" value="New York Style">
-                        <label for="newYorkStyle">New York Style</label>
-                        <input type="radio" id="glutenFree" name="doughOptions" value="Gluten Free">
-                        <label for="glutenFree">Gluten Free</label>
-                    </div>
-                    <div>
-                        <!--SELECT SIZE, DISPLAY PRICE FOR EACH SIZE-->
-                        <label for="sizeAndCost"><strong><br>Step 2: Select Size</strong></label>
-                        <select class="form-control" id="sizeAndCost">
-                            <option value="0">Select your preferred pizza size</option>
-                        </select>
-                    </div>
-                    <div>
-                        <!--SELECT AMOUNT OF CHEESE-->
-                        <label for="cheeseOptions"><br><strong>Step 3: How much cheese should we add?</strong></label>
-                        <select class="form-control" id="cheeseOptions">
-                            <option value="0">Light: $0.00</option>
-                            <option value="0">Normal: $0.00</option>
-                            <option value="2.99">Extra: +$2.99</option>
-                            <option value="3.99">Double: +$3.99</option>
-                        </select>
-                    </div>
-                    <div>
-                        <!--SELECT SAUCE TYPE-->
-                        <label for="sauceOptions"><br><strong>Step 4: What Type of Sauce?</strong></label>
-                        <select class="form-control" id="sauceOptions">
-                            <option value="0">Regular Tomato: $0.00</option>
-                            <option value="0.99">Hearty Tomato: +$.99</option>
-                            <option value="1.99">BBQ Sauce: +$1.99</option>
-                        </select>
-                    </div>
-                    <div id="toppings">
-                        <br><strong>Step 5: Extra Toppings - $0.99 each</strong>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="pepperoni" name="extraToppings" value="pepperoni"> Pepperoni</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="sausage" name="extraToppings" value="sausage"> Sausage</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="ham" name="extraToppings" value="ham"> Ham</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="bacon" name="extraToppings" value="bacon"> Bacon</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="salami" name="extraToppings" value="salami"> Salami</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="peppers" name="extraToppings" value="peppers"> Peppers</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="olives" name="extraToppings" value="olives"> Olives</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="jalapenos" name="extraToppings" value="jalapenos"> Jalapenos</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="mushrooms" name="extraToppings" value="mushrooms"> Mushrooms</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="pineapple" name="extraToppings" value="pineapple"> Pineapple</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" id="onion" name="extraToppings" value="onion"> Onion</label>
-                        </div>
-                    </div>
-                </fieldset>    
-                </div>
-                <div>
-                    <a id="submitOrder"><button type="submit" class="btn btn-lg btn-success">Satisfied with My Order, Ready to Pay</button></a>
+                    <form id="orderPayment">
+                        <fieldset>
+                            <legend>Payment Information</legend>
+                            <div class="creditCardInfo">
+                                <div class="payment">
+                                    <div class="form-group owner">
+                                        <label for="owner">Card Holder Full Name</label>
+                                        <input type="text" class="form-control" id="cardHolderName" placeholder="Full name on credit card"><span id="cardHolderNameError"></span>
+                                    </div>
+                
+                                    <div class="form-group" id="cardNumber">
+                                        <label for="cardNumber">Credit Card Number</label>
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="Credit Card number"><span id="cardNumberError"></span>
+                                    </div>
+                                    <div class="form-group CVV">
+                                        <label for="cvv">CVC Code</label>
+                                        <input type="password" class="form-control" id="cvcCode" placeholder="CVC security code"><span id="cvcCodeError"></span>
+                                    </div>
+                                    <div class="form-group" id="expirationDate">
+                                        <label>Expiration Date:</label>
+                                        <select id="month">
+                                            <option value="0">Month</option>
+                                            <option value="01">January</option>
+                                            <option value="02">February </option>
+                                            <option value="03">March</option>
+                                            <option value="04">April</option>
+                                            <option value="05">May</option>
+                                            <option value="06">June</option>
+                                            <option value="07">July</option>
+                                            <option value="08">August</option>
+                                            <option value="09">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>
+                                        <select id="year">
+                                            <option value="0"> YEAR</option>
+                                            <option value="2017"> 2017</option>
+                                            <option value="2018"> 2018</option>
+                                            <option value="2019"> 2019</option>
+                                            <option value="2020"> 2020</option>
+                                            <option value="2021"> 2021</option>
+                                            <option value="2022"> 2022</option>
+                                            <option value="2023"> 2023</option>
+                                            <option value="2024"> 2024</option>
+                                        </select>
+                                    </div>
+                                <div class="form-group" id="processPayment">
+                                    <button type="submit" class="btn btn-lg btn-success" id="processPayment">Click to Pay</button>
+                                </div>
+                            </div> 
+                        </fieldset>
+                    </form>        
                 </div>
             </form>
         </div>
     </div>
     
-
-
-      <footer class="footer">
-        <p>&copy; Wild River Inc.</p>
-      </footer>
+    <footer class="footer">
+    <p>&copy; Wild River Pizza Inc.</p>
+    </footer>
 
     </div> <!-- /container -->
-
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
