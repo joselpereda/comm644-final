@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wild River Pizza Order Form</title>
 
+    <link href="css/styles.css" rel="stylesheet">
+    <script src="js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <!--<link rel="icon" href="../../favicon.ico">-->
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/jumbotron-narrow/">
 
@@ -23,10 +27,6 @@
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="https://getbootstrap.com/docs/3.4/assets/js/ie-emulation-modes-warning.js"></script>
-
-    <link href="css/styles.css" rel="stylesheet">
-    <script src="js/script.js"></script>
-
 </head>
 <body>
     <div class="container">
@@ -42,7 +42,8 @@
 
       <div style="background:transparent !important" class="jumbotron">
         <h1>Pizza Order Form</h1>
-        <p class="lead">Pizza Prepared to the Delight of Our Most Demanding Customers! Tel: (619) 921-2222</p>
+        <p class="lead">Pizza Prepared to the Delight of Our Most Demanding Customers!</p> 
+        <p>Tel: (619) 921-2222</p>
       </div>
 
       <!--PIZZA ORDER: CAPTURE DELIVERY INFORMATION & PIZZA ORDER DETAILS-->
@@ -57,12 +58,12 @@
                 <!--<h2>Delivery Information</h2>-->
 
                 <label for="custName">Enter Firt & Last Name</label>
-                <input type="text" id="custName" placeholder ="Joey Smith" class="form-control"><br>
+                <input type="text" id="custName" placeholder ="Joey Smith" class="form-control"><span id="nameerror"></span><br>
                 
                 <!--ADDRESS AND ADDRESS TYPE-->
                 <div>
                     <label>Address Type:</label>
-                    <select name="addType" id="addType">
+                    <select name="addType" id="addType" onchange="otherSelected(this.value);">
                         <option value="0">Select Address Type</option>
                         <option value="house">House</option>
                         <option value="apartment">Apartment</option>
@@ -72,18 +73,18 @@
                         <option value="dorm">Dorm</option>
                         <option value="other">Other</option>
                     </select>
+
+                    <input type="text" class="form-control" id="otherSelected" name="otherSelected" style="display:none;" /><span id="addresserror"></span>
                 </div>
                 <div>
                     <label for="streetAddress"><br>Street Address</label>
-                    <input type="text"  id="streetAddress" placeholder ="5432 Elm Street" class="form-control"><br>
-
-                    <p id="otherSelected"></p>
+                    <input type="text"  id="streetAddress" placeholder ="5432 Elm Street" class="form-control"><span id="streeterror"></span>
                 </div>
                 
                 <!--CAPTURE OPITONAL APT, SUITE OR ROOM #-->
                 <div>
                     <label for="subAddressType">Apt/Suite/Room #: </label>
-                    <input type="text" id="subAddressType" placeholder ="101" class="form-control">
+                    <input type="text" id="subAddressType" placeholder ="101" class="form-control"><span id="apartmenterror"></span>
                     <input type="radio" id="apt" name="apt_suite_room" value="apt">
                     <label for="apt">Apt</label>
                     <input type="radio" id="suite" name="apt_suite_room" value="suite">
@@ -95,28 +96,36 @@
                 <!--CAPTURE CITY-->
                 <div>
                     <label for="city">City</label><br>
-                    <input type="text" maxlength="30" id="city" name="city" placeholder ="San Diego" class="form-control"><br>
+                    <input type="text" maxlength="30" id="city" name="city" placeholder ="San Diego" class="form-control"><span id="cityerror"></span>
                 </div>
                 <!--CAPTURE STATE-->
                 <div>
                     <label for="state">State</label><br>
-                    <input type="text" maxlength="30"  id="state" name="state" placeholder ="CA" class="form-control"><br>
+                    <input type="text" maxlength="30"  id="state" name="state" placeholder ="CA" class="form-control"><br><span id="stateerror"></span>
                 </div>
                 <!--CAPTURE ZIP CODE-->
                 <div>
                     <label for="zipCode">Zip Code</label>
-                    <input type="text" maxlength="5"  id="zipCode" name="zipCode" placeholder ="91303" class="form-control"><br>
+                    <input type="text" maxlength="5"  id="zipCode" name="zipCode" placeholder ="91303" class="form-control"><br><span id="ziperror"></span>
                 </div>
                 <!--CAPTURE PHONE #-->
                 <div>
                     <label for="phone">Phone</label><br>
-                    <input type="tel" maxlength="15"  id="phone" name="phone" placeholder ="310-454-1212" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control"><br>
+                    <input type="tel" maxlength="15"  id="phone" name="phone" placeholder ="310-454-1212"  class="form-control"><span id="phoneerror"></span>
                 </div>
                 <!--CAPTURE E-MAIL-->
                 <div>
                     <label for="email">E-mail</label><br>
-                    <input type="email" maxlength="30" id="email" name="email" placeholder ="joey.smith@live.com" class="form-control"><br>
+                    <input type="email" maxlength="30" id="email" name="email" placeholder ="joey.smith@live.com" class="form-control"><br><span id="emailerror"></span>
                 </div>
+
+                <div id="total">
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon" id="tprice">Total: $</div>
+                        <input type="text" class="form-control" id="totalPrice" placeholder="Total Price" value="0.00" readonly><br>
+                    </div>
+                </div>
+
             </fieldset>
             </div>
             <div class="col-lg-6">
@@ -212,7 +221,7 @@
             </fieldset>    
             </div>
             <div>
-                <a id="submitOrder"><button type="submit" class="btn btn-lg btn-success">Satisfied with My Order, Ready to Pay</button></a>
+                <a id="submitOrder"><button type="submit" class="btn btn-lg btn-success">Click to proceed with payment</button></a>
             </div>
         </form>
         </div>
@@ -228,7 +237,7 @@
                     <legend>Billing Information</legend>
 
                     <div class="form-group has-success">
-                        <label class="custom-control custom-checkbox" id="checkbox2">
+                        <label class="custom-control custom-checkbox" id="checkbox1">
                     <input type="checkbox" class="custom-control-input" id="bcheckBox">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Check if Same as a Delivery Address</span>
@@ -236,12 +245,12 @@
                     </div>
 
                     <label for="custName2">Enter Firt & Last Name</label>
-                    <input type="text" id="custName2" placeholder ="Joey Smith" class="form-control"><br>
+                    <input type="text" id="custName2" placeholder ="Joey Smith" class="form-control"><span id="name2error"></span>
                     
                     <!--ADDRESS AND ADDRESS TYPE-->
                     <div>
                         <label for="streetAddress2"><br>Street Address</label>
-                        <input type="text"  id="streetAddress2" placeholder ="5432 Elm Street" class="form-control"><br>
+                        <input type="text"  id="streetAddress2" placeholder ="5432 Elm Street" class="form-control"><span id="street2error"></span>
 
                         <p id="otherSelected"></p>
                     </div>
@@ -249,7 +258,7 @@
                     <!--CAPTURE OPITONAL APT, SUITE OR ROOM #-->
                     <div>
                         <label for="subAddressType2">Apt/Suite/Room #: </label>
-                        <input type="text" id="subAddressType2" placeholder ="101" class="form-control">
+                        <input type="text" id="subAddressType2" placeholder ="101" class="form-control"><span id="subAddressType2error"></span>
                         <input type="radio" id="apt2" name="apt_suite_room" value="apt">
                         <label for="apt2">Apt</label>
                         <input type="radio" id="suite2" name="apt_suite_room" value="suite">
@@ -261,28 +270,29 @@
                     <!--CAPTURE CITY-->
                     <div>
                         <label for="city2">City</label><br>
-                        <input type="text" maxlength="30" id="city2" name="city2" placeholder ="San Diego" class="form-control"><br>
+                        <input type="text" maxlength="30" id="city2" name="city2" placeholder ="San Diego" class="form-control"><span id="city2error"></span>
                     </div>
                     <!--CAPTURE STATE-->
                     <div>
                         <label for="state2">State</label><br>
-                        <input type="text" maxlength="30"  id="state2" name="state2" placeholder ="CA" class="form-control"><br>
+                        <input type="text" maxlength="30"  id="state2" name="state2" placeholder ="CA" class="form-control"><span id="state2error"></span>
                     </div>
                     <!--CAPTURE ZIP CODE-->
                     <div>
-                        <label for="zipCod2e">Zip Code</label>
-                        <input type="text" maxlength="5"  id="zipCode2" name="zipCode2" placeholder ="91303" class="form-control"><br>
+                        <label for="zipCode2">Zip Code</label>
+                        <input type="text" maxlength="5"  id="zipCode2" name="zipCode2" placeholder ="91303" class="form-control"><span id="zip2error"></span>
                     </div>
                     <!--CAPTURE PHONE #-->
-                    <div>
+                    <!--<div>
                         <label for="phone2">Phone</label><br>
-                        <input type="tel" maxlength="15"  id="phone2" name="phone2" placeholder ="310-454-1212" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control"><br>
+                        <input type="tel" maxlength="15"  id="phone2" name="phone2" placeholder ="310-454-1212" class="form-control"><span id="phone2error"></span>
                     </div>
-                    <!--CAPTURE E-MAIL-->
+                    CAPTURE E-MAIL
                     <div>
                         <label for="email2">E-mail</label><br>
-                        <input type="email" maxlength="30" id="email2" name="email2" placeholder ="joey.smith@live.com" class="form-control"><br>
+                        <input type="email" maxlength="30" id="email2" name="email2" placeholder ="joey.smith@live.com" class="form-control"><span id="email2error"></span>
                     </div>
+                    -->
                 </fieldset>
                 </div>
                 <div class="col-lg-6">
@@ -293,12 +303,12 @@
                                 <div class="payment">
                                     <div class="form-group owner">
                                         <label for="owner">Card Holder Full Name</label>
-                                        <input type="text" class="form-control" id="cardHolderName" placeholder="Full name on credit card"><span id="cardHolderNameError"></span>
+                                        <input type="text" class="form-control" id="cardHolderName" placeholder="Name listed on credit card"><span id="cardHolderNameError"></span>
                                     </div>
                 
                                     <div class="form-group" id="cardNumber">
                                         <label for="cardNumber">Credit Card Number</label>
-                                        <input type="text" class="form-control" id="cardNumber" placeholder="Credit Card number"><span id="cardNumberError"></span>
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="Credit card number"><span id="cardNumberError"></span>
                                     </div>
                                     <div class="form-group CVV">
                                         <label for="cvv">CVC Code</label>
@@ -323,14 +333,13 @@
                                         </select>
                                         <select id="year">
                                             <option value="0"> YEAR</option>
-                                            <option value="2017"> 2017</option>
-                                            <option value="2018"> 2018</option>
-                                            <option value="2019"> 2019</option>
-                                            <option value="2020"> 2020</option>
                                             <option value="2021"> 2021</option>
                                             <option value="2022"> 2022</option>
                                             <option value="2023"> 2023</option>
                                             <option value="2024"> 2024</option>
+                                            <option value="2025"> 2024</option>
+                                            <option value="2026"> 2024</option>
+                                            <option value="2027"> 2024</option>
                                         </select>
                                     </div>
                                 <div class="form-group" id="processPayment">
@@ -350,7 +359,5 @@
 
     </div> <!-- /container -->
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
