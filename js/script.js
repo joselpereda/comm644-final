@@ -358,6 +358,14 @@ function crediCardIsValid(creditcard) {
 
     return (nCheck % 10) === 0;
 }
+function ReadOnlyForm(formId, isReadOnly) {
+    let f = document.forms[formId];
+    let i, fLen;
+    for (i = 0, fLen = f.length; i < fLen; i += 1) {
+      f.elements[i].readOnly = isReadOnly;
+      f.elements[i].disabled = isReadOnly;
+    }
+  }
 
 function checkBox() {
     $("custName2").value = $("custName").value;
@@ -552,139 +560,205 @@ window.addEventListener("load", function() {
         }
     });
 
-// PIZZA PRICING, BY SIZE AND TYPE
-let crust = {
-    handTossed: [{
+    // PIZZA PRICING, BY SIZE AND TYPE
+    let crust = {
+        handTossed: [{
+            size: "Small",
+            price: "$9.99"
+        },
+        {
+            size: "Medium",
+            price: "$12.99"
+        },
+        {
+            size: "Large",
+            price: "$14.99"
+        }
+        ],
+        thinCrust: [{
+            size: "Medium",
+            price: "$11.99"
+        },
+        {
+            size: "Large",
+            price: "$13.99"
+        }
+        ],
+        newYorkStyle: [{
+            size: "Large",
+            price: "$16.99"
+        },
+        {
+            size: "Extra Large",
+            price: "$19.99"
+        }
+        ],
+        glutenFree: [{
         size: "Small",
-        price: "$9.99"
-      },
-      {
-        size: "Medium",
-        price: "$12.99"
-      },
-      {
-        size: "Large",
-        price: "$14.99"
-      }
-    ],
-    thinCrust: [{
-        size: "Medium",
-        price: "$11.99"
-      },
-      {
-        size: "Large",
-        price: "$13.99"
-      }
-    ],
-    newYorkStyle: [{
-        size: "Large",
-        price: "$16.99"
-      },
-      {
-        size: "Extra Large",
-        price: "$19.99"
-      }
-    ],
-    glutenFree: [{
-      size: "Small",
-      price: "$10.99"
-    }]
-  };
+        price: "$10.99"
+        }]
+    };
 
-let optdoughlist = document.getElementsByName("doughOptions");
-let optdoughItems = [].slice.call(optdoughlist);
+    let optdoughlist = document.getElementsByName("doughOptions");
+    let optdoughItems = [].slice.call(optdoughlist);
 
-optdoughItems.forEach(function(item) {
-    item.addEventListener('change', function() {
-        let selectedDough, i, el;
-        selectedDough = crust[item.id];
-        $("sizeAndCost").innerHTML = null;
-        for (i = 0; i < selectedDough.length; i += 1) {
-            el = document.createElement("option");
-            el.textContent = selectedDough[i].size + " (" + selectedDough[i].price + ")";
-            el.value = selectedDough[i].price.substr(1);
-            $("sizeAndCost").appendChild(el);
-        }
-        totalValue();
+    optdoughItems.forEach(function(item) {
+        item.addEventListener('change', function() {
+            let selectedDough, i, el;
+            selectedDough = crust[item.id];
+            $("sizeAndCost").innerHTML = null;
+            for (i = 0; i < selectedDough.length; i += 1) {
+                el = document.createElement("option");
+                el.textContent = selectedDough[i].size + " (" + selectedDough[i].price + ")";
+                el.value = selectedDough[i].price.substr(1);
+                $("sizeAndCost").appendChild(el);
+            }
+            totalValue();
+        });
     });
-});
 
 
-$("sizeAndCost").addEventListener("change", totalValue);
-$("cheeseOptions").addEventListener("change", totalValue);
-$("sauceOptions").addEventListener("change", totalValue);
-$("toppings").addEventListener("change", totalValue);
+    $("sizeAndCost").addEventListener("change", totalValue);
+    $("cheeseOptions").addEventListener("change", totalValue);
+    $("sauceOptions").addEventListener("change", totalValue);
+    $("toppings").addEventListener("change", totalValue);
 
-// VERIFY CREDIT CARD INFORMATION
-$("cardHolderName").addEventListener("input", function() {
-    cardHolderName();
-    if ($("cardHolderName").style.border === "2px solid red") {
-      $("cardHolderNameError").style.color = "red";
-    } else {
-      $("cardHolderNameError").style.color = "green";
-    }
-});
+    $("submitOrder").addEventListener("click", function(e) {
+        e.preventDefault();
+        if (($("custName").value !== "") && ($("addType").value !== "") && ($("streetAddress").value !== "") && ($("city").value !== "") && ($("state").value !== "") && ($("zipCode").value !== "") && ($("phone").value !== "") && ($("email").value !== "")) {
 
-$("cvcCode").addEventListener("input", function() {
-    cvcIsValid();
-    if ($("cvcCode").style.border === "2px solid red") {
-        $("cvcCodeError").style.color = "red";
-    } else {
-        $("cvcCodeError").style.color = "green";
-    }
-});
+        if (($("custName").style.border !== "2px solid red") && ($("addType").style.border !== "2px solid red") && ($("streetAddress").style.border !== "2px solid red") && ($("city").style.border !== "2px solid red") && ($("state").style.border !== "2px solid red") && ($("zipCode").style.border !== "2px solid red") && ($("phone").style.border !== "2px solid red") && ($("email").style.border !== "2px solid red")) {
 
-$("month").addEventListener("change", exMonth);
+            if ($("handTossed").checked || $("thinCrust").checked || $("newYorkStyle").checked || $("glutenFree").checked) {
 
-$("year").addEventListener("change", function() {
-    exYear();
-    let d = new Date();
-    let currentYear = d.getFullYear();
-    let month = new Date().getMonth() + 1;
-    let year = parseInt($("year").options[$("year").selectedIndex].value, 10);
+            if (($("totalPrice").value === "0") || ($("totalPrice").value === "0.000")) {
+                e.preventDefault();
+                window.alert("Please select pizza size");
+            } else {
+                e.preventDefault();
+                if (window.confirm("Total Cost: $" + $("totalPrice").value + "\n Is this correct?")) {
+                e.preventDefault();
+                window.alert("Enter billing information");
+                $("billingInformation").style.display = "block";
+                ReadOnlyForm("deliveryLocation", true);
+                ReadOnlyForm("bulidingPizza", true);
 
-    if (($("month").selectedIndex < month && currentYear === year) || (year < currentYear)) {
-        window.alert("please enter valid date");
-        $("month").selectedIndex = 0;
-        $("year").selectedIndex = 0;
-    }
-});
-
-$("cardNumber").addEventListener("blur", function() {
-    let visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
-    let masterRegEx = /^(?:5[1-5][0-9]{14})$/;
-    let americanRegEx = /^(?:3[47][0-9]{13})$/;
-
-    if (visaRegEx.test($("cardNumber").value)) {
-
-        if (!crediCardIsValid($("cardNumber").value)) {
-            $("cardNumber").style.border = "2px solid red";
+                } else {
+                e.preventDefault();
+                }
+            }
+            } else {
+            e.preventDefault();
+            window.alert("Need to fill pizza order");
+            }
         } else {
-            $("cardNumberError").style.color = "green";
-            $("cardNumber").style.border = "2px solid green";
-        return true;
+            e.preventDefault();
+            window.alert("Need to fill customer information");
         }
-    } else if (masterRegEx.test($("cardNumber").value)) {
-        if (!crediCardIsValid($("cardNumber").value)) {
-            $("cardNumber").style.border = "2px solid red";
         } else {
-            $("cardNumberError").style.color = "green";
-            $("cardNumber").style.border = "2px solid green";
+        e.preventDefault();
+        window.alert("Need to fill customer information");
+        }
+    });
+
+    // VERIFY CREDIT CARD INFORMATION
+    $("cardHolderName").addEventListener("input", function() {
+        cardHolderName();
+        if ($("cardHolderName").style.border === "2px solid red") {
+        $("cardHolderNameError").style.color = "red";
+        } else {
+        $("cardHolderNameError").style.color = "green";
+        }
+    });
+
+    $("cvcCode").addEventListener("input", function() {
+        cvcIsValid();
+        if ($("cvcCode").style.border === "2px solid red") {
+            $("cvcCodeError").style.color = "red";
+        } else {
+            $("cvcCodeError").style.color = "green";
+        }
+    });
+
+    $("month").addEventListener("change", exMonth);
+
+    $("year").addEventListener("change", function() {
+        exYear();
+        let d = new Date();
+        let currentYear = d.getFullYear();
+        let month = new Date().getMonth() + 1;
+        let year = parseInt($("year").options[$("year").selectedIndex].value, 10);
+
+        if (($("month").selectedIndex < month && currentYear === year) || (year < currentYear)) {
+            window.alert("please enter valid date");
+            $("month").selectedIndex = 0;
+            $("year").selectedIndex = 0;
+        }
+    });
+
+    $("cardNumber").addEventListener("blur", function() {
+        let visaRegEx = /^(?:4[0-9]{12}(?:[0-9]{3})?)$/;
+        let masterRegEx = /^(?:5[1-5][0-9]{14})$/;
+        let americanRegEx = /^(?:3[47][0-9]{13})$/;
+
+        if (visaRegEx.test($("cardNumber").value)) {
+
+            if (!crediCardIsValid($("cardNumber").value)) {
+                $("cardNumber").style.border = "2px solid red";
+            } else {
+                $("cardNumberError").style.color = "green";
+                $("cardNumber").style.border = "2px solid green";
             return true;
-        }
-    } else if (americanRegEx.test($("cardNumber").value)) {
-        if (!crediCardIsValid($("cardNumber").value)) {
-            $("cardNumber").style.border = "2px solid red";
-        } else {
-            $("cardNumberError").style.color = "green";
-            $("cardNumber").style.border = "2px solid green";
-        return true;
-        }
+            }
+        } else if (masterRegEx.test($("cardNumber").value)) {
+            if (!crediCardIsValid($("cardNumber").value)) {
+                $("cardNumber").style.border = "2px solid red";
+            } else {
+                $("cardNumberError").style.color = "green";
+                $("cardNumber").style.border = "2px solid green";
+                return true;
+            }
+        } else if (americanRegEx.test($("cardNumber").value)) {
+            if (!crediCardIsValid($("cardNumber").value)) {
+                $("cardNumber").style.border = "2px solid red";
+            } else {
+                $("cardNumberError").style.color = "green";
+                $("cardNumber").style.border = "2px solid green";
+            return true;
+            }
 
-    } else {
-        $("cardNumberError").style.color = "red";
-        $("cardNumber").style.border = "2px solid red";
-    }
-});
+        } else {
+            $("cardNumberError").style.color = "red";
+            $("cardNumber").style.border = "2px solid red";
+        }
+    });
+
+    $("processPayment").addEventListener("click", function(eve) {
+        if (($("custName2").value !== "") && ($("streetAddress2").value !== "") && ($("city2").value !== "") && ($("state2").value !== "") && ($("zipCode2").value !== "")) {
+    
+          if (($("custName2").style.border !== "2px solid red") && ($("streetAddress2").style.border !== "2px solid red") && ($("city2").style.border !== "2px solid red") && ($("state2").style.border !== "2px solid red") && ($("zipCode2").style.border !== "2px solid red")) {
+    
+            if ($("cardHolderName").style.border !== "2px solid red" && $("cvcCode").style.border !== "2px solid red" && $("cardNumber").style.border !== "2px solid red" && $("month").selectedIndex !== 0 &&
+              $("year").selectedIndex !== 0) {
+    
+              if (window.confirm("Click OK to confirm your order")) {
+    
+                window.alert("You ordered has been placed. It will be delivered within 30 minutes. Enjoy!");
+    
+              } else {
+                eve.preventDefault();
+              }
+    
+            } else {
+              eve.preventDefault();
+              window.alert("Payment Information incomplete");
+            }
+          } else {
+            eve.preventDefault();
+            window.alert("Billing information incomplete");
+          }
+        }
+    
+      });
 
 });
